@@ -1,34 +1,21 @@
-from pyspark.sql import SparkSession
-from openweather_utils import fetch_weather_data
+import sys
 
-from pyspark.sql import SparkSession
+from batch_main import batch_main
+from stream_main import stream_main
 
-def main():
-    # Initialize Spark session
-    spark = SparkSession.builder \
-        .appName("OpenWeather Spark App") \
-        .getOrCreate()
 
-    # Fetch real-time weather data
-    weather_data = fetch_weather_data()
+def handle_batch():
+    print("Batch function called.")
 
-    # Process weather data using Spark
-    df = spark.createDataFrame(weather_data)
-    df.show()
-
-    # Example: Filtering data
-    warm_df = df.filter(df.temp > 3)
-    warm_df.show()
-
-    cold_df = df.filter(df["temp"] <= 3)
-    cold_df.show()
-
-    union_df = warm_df.union(cold_df)
-    union_df.show()
-
-    # Stop Spark session
-    spark.stop()
-
+def handle_other():
+    print("Other function called.")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg == "batch":
+            batch_main()
+        else:
+            stream_main()
+    else:
+        print("No argument provided.")
