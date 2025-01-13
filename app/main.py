@@ -17,8 +17,14 @@ def main():
     df.show()
 
     # Example: Filtering data
-    filtered_df = df.filter(df["temp"] > 15)
-    filtered_df.show()
+    warm_df = df.filter(df.temp > 3)
+    warm_df.show()
+
+    cold_df = df.filter(df["temp"] <= 3)
+    cold_df.show()
+
+    union_df = warm_df.union(cold_df)
+    union_df.show()
 
     # Stop Spark session
     spark.stop()
