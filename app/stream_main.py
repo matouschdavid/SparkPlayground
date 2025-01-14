@@ -2,6 +2,7 @@ import json
 import time
 import random
 import requests
+import shutil
 import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, when
@@ -42,8 +43,9 @@ def fetch_weather(city):
 
 def simulate_streaming_data():
     """Simulate streaming weather data by creating new JSON files."""
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+    shutil.rmtree(OUTPUT_DIR)
+
+    os.makedirs(OUTPUT_DIR)
 
     count = 0
     while True:
