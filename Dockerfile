@@ -18,8 +18,6 @@ RUN apt-get update && \
 RUN update-alternatives --set java $(update-alternatives --list java | grep java-17) && \
     echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> /etc/environment
 
-# Load the correct JAVA_HOME into the environment
-ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-arm64"
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 # Download and install Spark
