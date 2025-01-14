@@ -7,7 +7,8 @@ services:
       - SPARK_HOME=/opt/spark
       - PYSPARK_PYTHON=python3
       - PYSPARK_DRIVER_PYTHON=python3
+      - PROCESSING=${PROCESSING}
     volumes:
       - ./app:/app
     working_dir: /app
-    command: ["python", "main.py", "stream"]
+    command: ["python", "main.py", "${PROCESSING}"]
