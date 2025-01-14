@@ -43,7 +43,8 @@ def fetch_weather(city):
 
 def simulate_streaming_data():
     """Simulate streaming weather data by creating new JSON files."""
-    shutil.rmtree(OUTPUT_DIR)
+    if os.path.exists(OUTPUT_DIR) and os.path.isdir(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
 
     os.makedirs(OUTPUT_DIR)
 
