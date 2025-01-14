@@ -4,9 +4,6 @@ services:
     build: .
     container_name: spark-container
     environment:
-      - SPARK_HOME=/opt/spark
-      - PYSPARK_PYTHON=python3
-      - PYSPARK_DRIVER_PYTHON=python3
       - PROCESSING=${PROCESSING}
     volumes:
       - ./app:/app
