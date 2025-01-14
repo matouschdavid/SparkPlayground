@@ -34,22 +34,19 @@ def fetch_weather_data(cities):
     return weather_data
 
 def batch_main():
-    # Initialize Spark session
     spark = SparkSession.builder \
         .appName("Batch Weather Analysis") \
         .getOrCreate()
 
-    # Fetch weather data
     weather_data = fetch_weather_data(CITIES)
 
-    # Convert data to Spark DataFrame
     weather_df = spark.createDataFrame(weather_data)
 
-    # Display the raw data
     print("Raw Weather Data:")
     weather_df.show()
 
-    # Calculate average temperature
+    # Spark operations
+    # Average Temperatures per City
     avg_temp_df = weather_df.groupBy("city").agg(
         avg("temperature").alias("avg_temperature")
     )
@@ -76,5 +73,4 @@ def batch_main():
 
     print("Results saved to /app/output/")
 
-    # Stop Spark session
     spark.stop()

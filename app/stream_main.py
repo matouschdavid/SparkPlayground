@@ -64,12 +64,10 @@ def simulate_streaming_data():
 
 def stream_weather_data():
     """Process weather data from the JSON files."""
-    # Initialize Spark session
     spark = SparkSession.builder \
         .appName("Stream Weather Processing") \
         .getOrCreate()
 
-    # Define schema for incoming weather data
     schema = StructType([
         StructField("city", StringType(), True),
         StructField("temperature", FloatType(), True),
@@ -100,8 +98,6 @@ def stream_weather_data():
 def stream_main():
     import threading
 
-    # Start the data generator in a separate thread
     threading.Thread(target=simulate_streaming_data, daemon=True).start()
 
-    # Start processing the generated data
     stream_weather_data()

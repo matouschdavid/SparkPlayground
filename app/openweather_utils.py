@@ -4,7 +4,6 @@ API_KEY = "feaf45fe9858c60352278a74c4292598"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 def fetch_weather_data():
-    # Replace with cities or locations of interest
     cities = ["London", "New York", "Berlin", "Linz", "Cosenza", "Rome"]
     weather_data = []
 
